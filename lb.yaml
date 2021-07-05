@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: weather-load-balancer
+  name: weather-app
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: weather-load-balancer
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: weather-load-balancer
+    spec:
+      containers:
+      - image: ameshref/nodejs-weather-app:v1.0.0
+        name: weather-app
+        ports:
+        - containerPort: 3000
